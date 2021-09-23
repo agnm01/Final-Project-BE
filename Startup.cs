@@ -31,7 +31,7 @@ namespace FE_FinalProject
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
-                    this.Configuration.GetConnectionString("DefaultConnection")));
+                    this.Configuration.GetConnectionString("PostgresLocalConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

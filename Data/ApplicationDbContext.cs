@@ -13,5 +13,13 @@ namespace FE_FinalProject
            : base(options)
         {
         }
+
+        public DbSet<FE_FinalProject.Models.About> Abouts { get; set; }
+
+        public DbSet<FE_FinalProject.Models.Resume> Resume { get; set; }
+
+        public DbSet<FE_FinalProject.Models.Portofolio> Portofolio { get; set; }
+
+        public DbSet<FE_FinalProject.Models.Technologies> Technologies { get; set; }
     }
 }
