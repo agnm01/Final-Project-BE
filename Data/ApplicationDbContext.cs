@@ -14,12 +14,12 @@ namespace FE_FinalProject
         {
         }
 
-        public DbSet<FE_FinalProject.Models.About> Abouts { get; set; }
+        public DbSet<FE_FinalProject.Models.Profile> Profile { get; set; }
 
-        public DbSet<FE_FinalProject.Models.Resume> Resume { get; set; }
+        public DbSet<FE_FinalProject.Models.Skill> Skill { get; set; }
 
-        public DbSet<FE_FinalProject.Models.Portofolio> Portofolio { get; set; }
+        public DbSet<FE_FinalProject.Models.Tool> Tool { get; set; }
 
-        public DbSet<FE_FinalProject.Models.Technologies> Technologies { get; set; }
+        public DbSet<FE_FinalProject.Models.Workplace> Workplace { get; set; }
     }
 }
