@@ -42,5 +42,7 @@ namespace FE_FinalProject.Models
         public virtual List<Workplace> Workplaces { get; set; }
 
         public virtual List<Tool> Tools { get; set; }
+
+        public string Picture { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace FE_FinalProject.Migrations
                     Phone = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Interests = table.Column<List<string>>(type: "text[]", nullable: true),
+                    Picture = table.Column<string>(type: "text", nullable: false),
                 },
                 constraints: table =>
                 {
