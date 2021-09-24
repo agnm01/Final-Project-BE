@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FE_FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace FE_FinalProject.Controllers
@@ -25,8 +26,12 @@ namespace FE_FinalProject.Controllers
                 return null;
             }
 
-            var profile = this.db.Profile.First(p => p.Id == id);
-
+            var profile = this.db.Profile
+                          .Include(p => p.Skills)
+                          .Include(p => p.Schools)
+                          .Include(p => p.Workplaces)
+                          .Include(p => p.Tools)
+                          .First(p => p.Id == id);
             if (profile == null)
             {
                 return null;
@@ -37,7 +42,12 @@ namespace FE_FinalProject.Controllers
 
         public IEnumerable<Profile> GetAllProfiles()
         {
-            var profiles = this.db.Profile.ToArray();
+            var profiles = this.db.Profile
+                           .Include(p => p.Skills)
+                           .Include(p => p.Schools)
+                           .Include(p => p.Workplaces)
+                           .Include(p => p.Tools)
+                           .ToArray();
 
             if (profiles == null)
             {
@@ -47,6 +57,7 @@ namespace FE_FinalProject.Controllers
             return profiles;
         }
 
+        [HttpPut]
         public Profile EditProfile([FromBody] Profile profile)
         {
             if (profile == null)
