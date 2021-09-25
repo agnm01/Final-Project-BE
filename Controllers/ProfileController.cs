@@ -19,9 +19,9 @@ namespace FE_FinalProject.Controllers
             this.db = db;
         }
 
-        public Profile GetProfileById(string id)
+        public Profile GetProfileById(string username)
         {
-            if (id == null || id == string.Empty)
+            if (username == null || username == string.Empty)
             {
                 return null;
             }
@@ -31,7 +31,7 @@ namespace FE_FinalProject.Controllers
                           .Include(p => p.Schools)
                           .Include(p => p.Workplaces)
                           .Include(p => p.Tools)
-                          .First(p => p.Id == id);
+                          .First(p => p.Username == username);
             if (profile == null)
             {
                 return null;
@@ -57,21 +57,132 @@ namespace FE_FinalProject.Controllers
             return profiles;
         }
 
-        [HttpPut]
-        public Profile EditProfile([FromBody] Profile profile)
-        {
-            if (profile == null)
-            {
-                return null;
-            }
+        //[HttpPut]
+        //public Profile EditProfile([FromBody] Profile profile)
+        //{
+        //    if (profile == null)
+        //    {
+        //        return null;
+        //    }
 
-            var dbProfile = this.db.Profile.First(p => p.Id == profile.Id);
+        //    var dbProfile = this.db.Profile.First(p => p.Username == profile.Username);
+
+        //    if (dbProfile != null)
+        //    {
+        //        dbProfile.Phone = profile.Phone;
+        //        this.db.Profile.Update(dbProfile);
+        //        this.db.SaveChanges();
+        //    }
+
+        //    return dbProfile;
+        //}
+
+        [HttpPut]
+        public Profile EditAbout(string username, string title, string description, DateTime birthdate, string universityName, string phone, string city, string state, int age, string degree, string email, string website)
+        {
+            var dbProfile = this.db.Profile.Include(p => p.Schools).First(p => p.Username == username);
 
             if (dbProfile != null)
             {
-                dbProfile.Phone = profile.Phone;
+                dbProfile.Title = title;
+                dbProfile.Description = description;
+                dbProfile.Birthdate = birthdate;
+                dbProfile.Schools.First().Name = universityName;
+                dbProfile.Phone = phone;
+                dbProfile.City = city;
+                dbProfile.State = state;
+                dbProfile.Age = age;
+                dbProfile.Degree = degree;
+                dbProfile.Email = email;
+                dbProfile.Website = we
+
                 this.db.Profile.Update(dbProfile);
                 this.db.SaveChanges();
+            }
+
+            return dbProfile;
+        }
+
+        [HttpPut]
+        public Profile EditSkills(string username, string skillName, int level)
+        {
+            var dbProfile = this.db.Profile.Include(p => p.Skills).First(p => p.Username == username);
+
+            if (dbProfile != null)
+            {
+                var dbSkill = dbProfile.Skills.First(p => p.Name == skillName);
+                if (dbSkill != null)
+                {
+                    dbSkill.Level = level;
+
+                    this.db.Skill.Update(dbSkill);
+                    this.db.SaveChanges();
+                }
+            }
+
+            return dbProfile;
+        }
+
+        [HttpPut]
+        public Profile EditSchool(string username, string schoolName, string schoolPeriod, string specialization, string description)
+        {
+            var dbProfile = this.db.Profile.Include(p => p.Schools).First(p => p.Username == username);
+
+            if (dbProfile != null)
+            {
+                foreach (School s in dbProfile.Schools)
+                {
+                    s.Name = schoolName;
+                    s.SchoolPeriod = schoolPeriod;
+                    s.Specialization = specialization;
+                    s.Description = description;
+                }
+
+                this.db.Profile.Update(dbProfile);
+                this.db.SaveChanges();
+            }
+
+            return dbProfile;
+        }
+
+        [HttpPut]
+        public Profile EditWorkplace(string username, string workplaceName, string workplacePeriod, string role, string description)
+        {
+            var dbProfile = this.db.Profile.Include(p => p.Workplaces).First(p => p.Username == username);
+
+            if (dbProfile != null)
+            {
+                foreach (Workplace w in dbProfile.Workplaces)
+                {
+                    w.CompanyName = workplaceName;
+                    w.WorkPeriod = workplacePeriod;
+                    w.RoleName = role;
+                    w.Description = description;
+                }
+
+                this.db.Profile.Update(dbProfile);
+                this.db.SaveChanges();
+            }
+
+            return dbProfile;
+        }
+
+        [HttpPut]
+        public Profile EditTools(string username, string toolName, string description)
+        {
+            var dbProfile = this.db.Profile.Include(p => p.Tools).First(p => p.Username == username);
+
+            if (dbProfile != null)
+            {
+                var dbTool = dbProfile.Tools.First(p => p.Name == toolName);
+                if (dbTool != null)
+                {
+                    dbTool.Name = toolName;
+                    dbTool.Description = description;
+
+                    this.db.Tool.Update(dbTool);
+                    this.db.SaveChanges();
+                }
             }
 
             return dbProfile;

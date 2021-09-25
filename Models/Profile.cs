@@ -13,6 +13,10 @@ namespace FE_FinalProject.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -32,6 +36,14 @@ namespace FE_FinalProject.Models
         public string Phone { get; set; }
 
         public string Email { get; set; }
+
+        public string Degree { get; set; }
+
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public string Website { get; set; }
 
         public List<string> Interests { get; set; }
 

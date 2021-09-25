@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using FE_FinalProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FE_FinalProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210925184624_addedSomeFields")]
+    partial class addedSomeFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +41,6 @@ namespace FE_FinalProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Degree")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
@@ -71,9 +70,6 @@ namespace FE_FinalProject.Migrations
                     b.Property<string>("StreetAddress")
                         .HasColumnType("text");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
                     b.Property<string>("Username")
                         .HasColumnType("text");
 
@@ -98,9 +94,6 @@ namespace FE_FinalProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ProfileId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SchoolPeriod")
                         .HasColumnType("text");
 
                     b.Property<string>("Specialization")

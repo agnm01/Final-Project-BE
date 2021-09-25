@@ -16,6 +16,8 @@ namespace FE_FinalProject.Models
 
         public string Name { get; set; }
 
+        public string SchoolPeriod { get; set; }
+
         public string Specialization { get; set; }
 
         public string Description { get; set; }
