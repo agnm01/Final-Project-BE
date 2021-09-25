@@ -56,7 +56,6 @@ namespace FE_FinalProject.Controllers
 
             return profiles;
         }
-
         //[HttpPut]
         //public Profile EditProfile([FromBody] Profile profile)
         //{
@@ -94,7 +93,7 @@ namespace FE_FinalProject.Controllers
                 dbProfile.Age = age;
                 dbProfile.Degree = degree;
                 dbProfile.Email = email;
-                dbProfile.Website = we
+                dbProfile.Website = website;
 
                 this.db.Profile.Update(dbProfile);
                 this.db.SaveChanges();
