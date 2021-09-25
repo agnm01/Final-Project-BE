@@ -13,5 +13,13 @@ namespace FE_FinalProject
            : base(options)
         {
         }
+
+        public DbSet<FE_FinalProject.Models.Profile> Profile { get; set; }
+
+        public DbSet<FE_FinalProject.Models.Skill> Skill { get; set; }
+
+        public DbSet<FE_FinalProject.Models.Tool> Tool { get; set; }
+
+        public DbSet<FE_FinalProject.Models.Workplace> Workplace { get; set; }
     }
 }

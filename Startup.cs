@@ -11,6 +11,7 @@ namespace FE_FinalProject
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.HttpsPolicy;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,9 @@ namespace FE_FinalProject
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
-                    this.Configuration.GetConnectionString("DefaultConnection")));
+                    this.Configuration.GetConnectionString("PostgresLocalConnection")));
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +43,7 @@ namespace FE_FinalProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                // app.UseMigrationsEndPoint(); // new
             }
             else
             {
@@ -54,6 +58,7 @@ namespace FE_FinalProject
 
             app.UseRouting();
 
+            // app.UseAuthentication(); // new
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -61,6 +66,7 @@ namespace FE_FinalProject
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                // endpoints.MapRazorPages(); // new
             });
         }
     }
