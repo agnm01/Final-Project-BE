@@ -16,6 +16,8 @@ namespace FE_FinalProject
 
         public DbSet<FE_FinalProject.Models.Profile> Profile { get; set; }
 
+        public DbSet<FE_FinalProject.Models.School> School { get; set; }
+
         public DbSet<FE_FinalProject.Models.Skill> Skill { get; set; }
 
         public DbSet<FE_FinalProject.Models.Tool> Tool { get; set; }
