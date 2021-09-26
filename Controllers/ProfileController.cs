@@ -40,6 +40,27 @@ namespace FE_FinalProject.Controllers
             return profile;
         }
 
+        public Profile Login(string username, string password)
+        {
+            if (username == null || username == string.Empty || password == null || password == string.Empty)
+            {
+                return null;
+            }
+
+            var profile = this.db.Profile
+                          .Include(p => p.Skills)
+                          .Include(p => p.Schools)
+                          .Include(p => p.Workplaces)
+                          .Include(p => p.Tools)
+                          .Where(p => p.Username == username && p.Password == password).FirstOrDefault();
+            if (profile == null)
+            {
+                return null;
+            }
+
+            return profile;
+        }
+
         public IEnumerable<Profile> GetAllProfiles()
         {
             var profiles = this.db.Profile
